@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MindSpace — твоё ментальное пространство</title>
+    <!-- Google Fonts + Font Awesome + AOS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf7ff;
+            color: #2e2a3a;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Кнопки */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #9b6bff;
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(155, 107, 255, 0.25);
+        }
+        .btn:hover {
+            background-color: #7b4fd9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(155, 107, 255, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #9b6bff;
+            color: #9b6bff;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background-color: #9b6bff;
+            color: white;
+        }
+        .hero .btn-outline {
+            border-color: white;
+            color: white;
+            background: rgba(255,255,255,0.15);
+        }
+        .hero .btn-outline:hover {
+            background: white;
+            color: #9b6bff;
+            border-color: white;
+        }
+        .btn-light {
+            background-color: #ffd6e0;
+            color: #9b6bff;
+            box-shadow: none;
+        }
+        .btn-light:hover {
+            background-color: #ffb7c6;
+            transform: translateY(-3px);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(90, 60, 140, 0.88), rgba(155, 107, 255, 0.82)), url('https://placehold.co/1920x1080/7e6b9f/white?text=Mindfulness+and+Calm') center/cover no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero-content {
+            max-width: 700px;
+            color: white;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.92;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Общие секции */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            color: #4a2f8f;
+        }
+        .section-sub {
+            text-align: center;
+            max-width: 700px;
+            margin: -30px auto 50px;
+            color: #5d5480;
+            font-size: 1.1rem;
+        }
+
+        /* Карточки функционала */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: white;
+            padding: 32px 24px;
+            border-radius: 32px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid #e9e2ff;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px -10px rgba(155, 107, 255, 0.2);
+            border-color: #cbb8ff;
+        }
+        .feature-icon {
+            font-size: 2.6rem;
+            color: #9b6bff;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #4a2f8f;
+        }
+        .feature-card p {
+            color: #5d5480;
+        }
+
+        /* Для кого (путь от А к Б) */
+        .journey {
+            background: #f2edfc;
+        }
+        .journey-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .journey-item {
+            flex: 1;
+            min-width: 220px;
+            background: white;
+            padding: 28px;
+            border-radius: 28px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .journey-item i {
+            font-size: 2rem;
+            color: #9b6bff;
+            margin-bottom: 15px;
+        }
+
+        /* Преимущества */
+        .advantages {
+            background: #ffffff;
+        }
+        .adv-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .adv-item {
+            flex: 1;
+            min-width: 230px;
+            background: #faf5ff;
+            padding: 28px;
+            border-radius: 28px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .adv-item:hover {
+            background: #f3ebff;
+        }
+
+        /* Отзывы */
+        .reviews {
+            background: #fffaf3;
+        }
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .review {
+            background: white;
+            padding: 28px;
+            border-radius: 32px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        .review:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(155, 107, 255, 0.1);
+        }
+        .review p {
+            font-style: italic;
+            margin-bottom: 16px;
+            color: #2e2a3a;
+        }
+        .review-author {
+            font-weight: 700;
+            color: #9b6bff;
+        }
+        .stars {
+            color: #ffc107;
+            margin-bottom: 12px;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: white;
+            border-radius: 24px;
+            margin-bottom: 16px;
+            padding: 0 24px;
+            border: 1px solid #e3d9ff;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #4a2f8f;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+            color: #5d5480;
+            padding-right: 20px;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 280px;
+            padding-bottom: 20px;
+        }
+
+        /* Цена */
+        .pricing {
+            background: linear-gradient(120deg, #efebff 0%, #ffffff 100%);
+            text-align: center;
+        }
+        .price-card {
+            max-width: 520px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 48px;
+            padding: 48px 32px;
+            box-shadow: 0 25px 40px -12px rgba(98, 55, 170, 0.2);
+        }
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #4a2f8f;
+        }
+        .price small {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Футер + стрелка */
+        footer {
+            background: #2d2640;
+            color: #cfc9e6;
+            padding: 48px 0 24px;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        .footer-links a {
+            color: #dbd1ff;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: #c6b1ff;
+        }
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #9b6bff;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top:hover {
+            background: #7b4fd9;
+            transform: translateY(-3px);
+        }
+
+        /* Навигация */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 251, 255, 0.96);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            padding: 16px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #4a2f8f;
+        }
+        .logo i {
+            color: #9b6bff;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-menu a {
+            text-decoration: none;
+            color: #3c3352;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-menu a:hover {
+            color: #9b6bff;
+        }
+        .menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #4a2f8f;
+        }
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: #fffffffa;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 30px 0;
+                gap: 24px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .btn {
+                padding: 10px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-container">
+        <div class="logo"><i class="fas fa-brain"></i> MindSpace</div>
+        <div class="menu-icon" id="menuIcon">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#features">Функции</a></li>
+            <li><a href="#advantages">Преимущества</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#pricing">Цена</a></li>
+            <li><a href="app.html" target="_blank">Приложение</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Позаботься о своём внутреннем мире</h1>
+            <p>MindSpace — персональный трекер ментального благополучия. Научись справляться со стрессом, улучшай сон и находи баланс с помощью научно обоснованных практик.</p>
+            <div class="hero-buttons">
+                <a href="#about" class="btn" id="learnMoreBtn">Узнать больше <i class="fas fa-arrow-right"></i></a>
+                <a href="app.html" class="btn btn-outline" target="_blank">Открыть приложение <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Краткое описание -->
+<section id="about">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">Твой заботливый проводник</div>
+        <div class="section-sub" data-aos="fade-up">MindSpace использует методы когнитивно-поведенческой терапии, осознанности и дыхательные техники, адаптированные под твоё текущее состояние и цели.</div>
+        <div data-aos="fade-up" style="text-align: center; margin-top: 20px;">
+            <i class="fas fa-heart" style="font-size: 3rem; color:#9b6bff;"></i>
+            <p style="max-width:600px; margin:20px auto;">Ответь на несколько вопросов — и мы подберём программу: от коротких медитаций до вечерних ритуалов для глубокого сна.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Для кого / От точки А к точке Б -->
+<section class="journey">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">От эмоционального хаоса к лёгкости</div>
+        <div class="journey-grid">
+            <div class="journey-item" data-aos="zoom-in">
+                <i class="fas fa-cloud-rain"></i>
+                <h3>Постоянный стресс</h3>
+                <p>→ Спокойствие и устойчивость к триггерам</p>
+            </div>
+            <div class="journey-item" data-aos="zoom-in" data-aos-delay="100">
+                <i class="fas fa-moon"></i>
+                <h3>Бессонница</h3>
+                <p>→ Глубокий восстановительный сон</p>
+            </div>
+            <div class="journey-item" data-aos="zoom-in" data-aos-delay="200">
+                <i class="fas fa-tired"></i>
+                <h3>Выгорание</h3>
+                <p>→ Энергия и мотивация без чувства вины</p>
+            </div>
+            <div class="journey-item" data-aos="zoom-in" data-aos-delay="300">
+                <i class="fas fa-user-check"></i>
+                <h3>Низкая самооценка</h3>
+                <p>→ Принятие себя и уверенность</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Карточки функционала -->
+<section id="features">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">Возможности MindSpace</div>
+        <div class="features-grid">
+            <div class="feature-card" data-aos="flip-left">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Трекер настроения</h3>
+                <p>Ежедневная шкала эмоций + аналитика. Замечай свои паттерны и улучшай состояние.</p>
+            </div>
+            <div class="feature-card" data-aos="flip-left" data-aos-delay="100">
+                <div class="feature-icon"><i class="fas fa-head-side-vr"></i></div>
+                <h3>Аудио-медитации</h3>
+                <p>От 3 до 20 минут. Дыхательные техники, сканирование тела, звуки природы.</p>
+            </div>
+            <div class="feature-card" data-aos="flip-left" data-aos-delay="200">
+                <div class="feature-icon"><i class="fas fa-dumbbell"></i></div>
+                <h3>CBT-дневник</h3>
+                <p>Когнитивная перестройка: работа с мыслями, упражнения «5 колонок», аффирмации.</p>
+            </div>
+            <div class="feature-card" data-aos="flip-left" data-aos-delay="300">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Экстренная помощь</h3>
+                <p>При панической атаке — быстрые техники переключения внимания и восстановления дыхания.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Преимущества и отличия от аналогов -->
+<section id="advantages" class="advantages">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">Почему выбирают MindSpace</div>
+        <div class="adv-list">
+            <div class="adv-item" data-aos="fade-right">
+                <i class="fas fa-user-md fa-2x" style="color:#9b6bff;"></i>
+                <h3>Научная база</h3>
+                <p>Методики на основе КПТ, майндфулнеса и позитивной психологии. Без псевдонауки.</p>
+            </div>
+            <div class="adv-item" data-aos="fade-right" data-aos-delay="100">
+                <i class="fas fa-universal-access fa-2x" style="color:#9b6bff;"></i>
+                <h3>Инклюзивность</h3>
+                <p>Учитываем ограничения по здоровью (дыхательные, моторные). Есть версии с субтитрами.</p>
+            </div>
+            <div class="adv-item" data-aos="fade-right" data-aos-delay="200">
+                <i class="fas fa-robot fa-2x" style="color:#9b6bff;"></i>
+                <h3>Персонализация</h3>
+                <p>Аналогов нет: AI адаптирует программу под ваше текущее состояние и предпочтения по формату.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Отзывы -->
+<section id="reviews" class="reviews">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">Честные истории пользователей</div>
+        <div class="reviews-grid">
+            <div class="review" data-aos="fade-up">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>«Я боролся с тревожностью годами. MindSpace помог мне найти простые дыхательные упражнения, которые реально работают в стрессовой ситуации. Спасибо!»</p>
+                <div class="review-author">— Дмитрий, 34 года</div>
+            </div>
+            <div class="review" data-aos="fade-up" data-aos-delay="100">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <p>«После декрета я чувствовала постоянную усталость и апатию. Программа MindSpace для восстановления сна и энергии изменила моё утро — теперь я снова радуюсь жизни.»</p>
+                <div class="review-author">— Екатерина, 29 лет</div>
+            </div>
+            <div class="review" data-aos="fade-up" data-aos-delay="200">
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <p>«CBT-дневник стал моим ежедневным ритуалом. Учусь не накручивать себя из-за мелочей. Огромное спасибо разработчикам за бережный подход.»</p>
+                <div class="review-author">— Ольга, 41 год</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up">Часто задаваемые вопросы</div>
+        <div class="faq-list" data-aos="fade-up">
+            <div class="faq-item">
+                <div class="faq-question">Подходит ли приложение, если у меня диагностированное расстройство? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">MindSpace не заменяет профессиональную терапию, но может быть отличным дополнением к ней. Вы можете указать свой диагноз (опционально) — приложение адаптирует рекомендации, избегая потенциальных триггеров. В тяжёлых случаях всегда рекомендуем обращаться к специалисту.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Есть ли ограничения по здоровью? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Да. Если у вас проблемы с дыханием (астма, ХОБЛ) или другие физические ограничения, приложение предложит альтернативные техники (визуализации, звукотерапию, мягкие движения) вместо интенсивных дыхательных упражнений.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Сколько времени нужно уделять каждый день? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Настройте свой график. Мы рекомендуем от 5 до 15 минут в день. Есть мини-практики по 3 минуты для занятых.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Есть ли бесплатный тариф? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Бесплатно доступны: ежедневный трекер настроения, одна медитация в день и базовый CBT-дневник. Премиум-подписка открывает все практики, расширенную аналитику и персонализированные планы.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Блок с ценой -->
+<section id="pricing" class="pricing">
+    <div class="container">
+        <div class="price-card" data-aos="flip-up">
+            <h2>Премиум-доступ</h2>
+            <div class="price">449 ₽ <small>/ месяц</small></div>
+            <p style="margin: 20px 0;">Более 200 медитаций, неограниченный CBT-дневник, углублённая аналитика настроения и персональные планы. Первые 7 дней бесплатно.</p>
+            <a href="#" class="btn" id="payButton">Попробовать бесплатно <i class="fas fa-gift"></i></a>
+            <p style="font-size:0.8rem; margin-top:20px;">Отмена в любой момент, без скрытых платежей</p>
+        </div>
+    </div>
+</section>
+
+<!-- Футер -->
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="#">О компании</a>
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Поддержка</a>
+            <a href="app.html" target="_blank">Приложение</a>
+        </div>
+        <p>&copy; 2026 MindSpace — забота о ментальном здоровье каждого.</p>
+        <p style="margin-top: 10px;"><i class="fas fa-feather-alt" style="color:#c6b1ff;"></i> Слушай себя, мы поможем</p>
+    </div>
+</footer>
+
+<!-- Стрелка вверх -->
+<div class="scroll-top" id="scrollTopBtn">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true, offset: 100 });
+
+    // Бургер-меню
+    const menuIcon = document.getElementById('menuIcon');
+    const navMenu = document.getElementById('navMenu');
+    menuIcon.addEventListener('click', () => navMenu.classList.toggle('active'));
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => navMenu.classList.remove('active'));
+    });
+
+    // Плавный скролл для якорей
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            if (targetId === '') return;
+            const target = document.getElementById(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Стрелка вверх
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) scrollBtn.classList.add('show');
+        else scrollBtn.classList.remove('show');
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // FAQ аккордеон
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            faqItems.forEach(i => i.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        });
+    });
+    if(faqItems.length) faqItems[0].classList.add('active');
+
+    // Кнопка оплаты (заглушка)
+    const payBtn = document.getElementById('payButton');
+    payBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('Демо-режим. Замените ссылку на реальную страницу оплаты.');
+    });
+</script>
+</body>
+</html>
